@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://thymeleaf.org/" xmlns:src="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Biblioteka Filmowa</title>
+    <meta name="description" content="Bibloteka filmowa">
+    <meta name="keywords" content="filmy, bibliteka, film">
+    <meta name="author" content="Mariusz Łyszczarz">
+    <meta http-equiv="X-Ua-Compatible" content="IE=edge">
+
+    <link rel="stylesheet" href="/css-bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/grid.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/hamburger.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="menu-wrap">
+    <input type="checkbox" class="toggler">
+    <div class="hamburger">
+        <div></div>
+    </div>
+    <div class="menu">
+        <div>
+            <div>
+                <ul>
+                    <li><a href="https://m.meteo.pl/krakow/60">Pogoda na dziś</a></li>
+                    <li><a href="#">Wyszukaj po kategorii</a></li>
+                    <li><a href="#">A</a></li>
+                    <li><a href="#">A</a></li>
+                    <li><a href="#">A</a></li>
+                    <li><a href="#">A</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<main>
+    <section class="jumpers">
+        <div class="container">
+            <header>
+                <h1>Biblioteka filmowa</h1>
+            </header>
+            <div class="row">
+
+
+                <div th:each="film: ${films}" class="col-6 col-sm-4 col-md-3 .col-lg-2" >
+                    <figure>
+                        <a th:href="@{'/film/' + ${film.getName().replace(' ','_')}}"><img th:src="@{/jpg/{nameId}.jpg(nameId=${film.getName()})}" th:alt="${film.getName()}"></a>
+                        <figcaption th:text="${film.getName()}"></figcaption>
+                    </figure>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+</main>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="js-bootstrap/bootstrap.min.js"></script>
+</body>
+</html>

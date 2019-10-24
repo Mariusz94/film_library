@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://thymeleaf.org/" xmlns:src="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Biblioteka Filmowa</title>
+    <meta name="description" content="Bibloteka filmowa">
+    <meta name="keywords" content="filmy, bibliteka, film">
+    <meta name="author" content="Mariusz Łyszczarz">
+    <meta http-equiv="X-Ua-Compatible" content="IE=edge">
+
+    <link rel="stylesheet" href="/css-bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<main>
+    <section class="jumpers">
+        <div class="container">
+            <header>
+                <h1>Biblioteka filmowa</h1>
+            </header>
+            <div class="row">
+
+                    <div class="col-12 col-sm-12 col-md-6 .col-lg-6">
+                        <figure>
+                            <div class="imageFilm">
+                            <img style="height: 100%" th:src="@{/jpg/{nameId}.jpg(nameId=${filmModel.getName()})}"
+                                 th:alt="${filmModel.getName()}">
+                            </div>
+                            <figcaption th:text="${filmModel.getName()}"></figcaption>
+                            <br>
+                            <a th:href="${filmModel.getPathFilm()}" target="_blank" th:text="${filmModel.getPathFilm()}">ala</a>
+                        </figure>
+                        <br/>
+                        <a th:href="@{/}">Główna strona</a>
+                    </div>
+
+                    <div class="col-12 col-sm-12 col-md-6 .col-lg-6">
+                        <form th:action="@{'/film/' + ${filmModel.getName().replace(' ','_')} + '/edit'}" method="post"
+                              th:object="${infoForm}">
+                            <br/>
+                            Nazwa :<input type="text" th:field="*{name}"/><br/><br/>
+                            Kategoria :<input type="text" th:field="*{category}"/><br/><br/>
+                            Rok :<input type="text" th:field="*{year}"/><br/><br/>
+                            Ocena :<input type="text" th:field="*{rating}"/><br/><br/>
+                            Język :<input type="text" th:field="*{language}"/><br/><br/>
+                            Napisy :<input type="text" th:field="*{subtitles}"/><br/><br/>
+                            Opis :<input type="text" th:field="*{description}"/><br/><br/>
+
+                            <input type="submit">
+
+                            <ul>
+                                <li th:each="category : ${selectableCategory}">
+                                    <div th:object="${checkCategories}">
+                                        <input type="checkbox" th:field="*{listCategory}" th:value="${category.getId()}">
+                                        <label th:text="${category.getName()}"></label>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </form>
+
+                    </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="js-bootstrap/bootstrap.min.js"></script>
+</body>
+</html>
