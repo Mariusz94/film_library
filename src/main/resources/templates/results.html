@@ -31,11 +31,11 @@
             <div>
                 <ul>
                     <li><a href="https://m.meteo.pl/krakow/60">Pogoda na dziś</a></li>
-                    <li><a href="/category">Wyszukaj po kategorii</a></li>
+                    <li><a href="#">Wyszukaj po kategorii</a></li>
                     <li><a href="#">A</a></li>
                     <li><a href="#">A</a></li>
                     <li><a href="#">A</a></li>
-                    <li><a href="#">A</a></li>
+                    <li><a href="/">Strona główna</a></li>
                 </ul>
             </div>
         </div>
@@ -50,10 +50,10 @@
             <div class="row">
 
 
-                <div th:each="film: ${films}" class="col-6 col-sm-4 col-md-3 .col-lg-2" >
+                <div th:each="result: ${results}" class="col-6 col-sm-4 col-md-3 .col-lg-2" >
                     <figure>
-                        <a th:href="@{'/film/' + ${film.getName().replace(' ','_')}}"><img th:src="@{/jpg/{nameId}.jpg(nameId=${film.getName()})}" th:alt="${film.getName()}"></a>
-                        <figcaption th:text="${film.getName()}"></figcaption>
+                        <a th:href="@{'/film/' + ${result.getName().replace(' ','_')}}"><img th:src="@{/jpg/{nameId}.jpg(nameId=${result.getName()})}" th:alt="${result.getName()}"></a>
+                        <figcaption th:text="${result.getName()}"></figcaption>
                     </figure>
                 </div>
 

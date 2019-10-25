@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import pl.lyszczarz.mariusz.film_library.model.CategoryModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Data
@@ -15,6 +16,7 @@ public class CategoryService {
     public CategoryService() {
         this.categories = new ArrayList<>();
         createCategoryList();
+        Collections.sort(categories);
     }
 
     private void createCategoryList(){

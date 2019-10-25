@@ -17,6 +17,11 @@ import pl.lyszczarz.mariusz.film_library.model.service.CategoryService;
 import pl.lyszczarz.mariusz.film_library.model.service.FilmsService;
 import pl.lyszczarz.mariusz.film_library.model.service.InfoService;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 @Controller
 public class MainController {
 
@@ -93,4 +98,24 @@ public class MainController {
         logMainController.info("Prekierowanie do strony z filmem po edycji pliku info.txt");
         return "redirect:/film/" + filmName.replace(" ","_");
     }
+
+    @GetMapping("/category")
+    public String categoryGet(Model model) {
+        model.addAttribute("categories", filmsService.getCategoryService().getCategories());
+        return "category";
+    }
+
+    @GetMapping("/results/{name}")
+    public String resultGet(Model model, @PathVariable("name") String name) {
+        List<FilmModel> results = new ArrayList<>();
+
+        for (FilmModel filmModel : filmsService.getFilms()) {
+            if(filmModel.getInfo().getCategory().toLowerCase().contains(name)) results.add(filmModel);
+        }
+
+        model.addAttribute("results",results);
+
+        return "results";
+    }
+
 }

@@ -19,8 +19,15 @@ public class CategoryConverter implements Converter<String, CategoryModel> {
     public CategoryModel convert(String id) {
         logCategoryConverter.info("Próba przekonwertowania id = " + id + " w CategoryModel");
         int idCategory = Integer.valueOf(id);
-        int index = idCategory - 1;
+        int index = idCategory;
+        CategoryModel categoryModel=null;
+        for (CategoryModel model : categoryService.getCategories()) {
+            if (model.getId() == index) {
+                categoryModel = model;
+                break;
+            }
+        }
 
-        return categoryService.getCategories().get(index);
+        return categoryModel;
     }
 }
